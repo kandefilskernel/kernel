@@ -12,13 +12,16 @@ The server will start at: http://35.183.24.211:3000/
 
 ## System Requirements
 Node.js v14.21.3
+
 macOS, Windows (including WSL), and Linux are supported
 
 ## Database Configuration
 ===MySQL Server 9.0.0===
 
 DB development server: MySQL Server 9.0.0
+
 user: root
+
 password: Etud1es@DevP@55
 
 Note: Its installed as windows service

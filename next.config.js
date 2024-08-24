@@ -24,8 +24,8 @@ const nextConfig = {
 			"https://api.cloudinary.com/v1_1/cloudname/video/upload",
 		CLOUDINARY_ZIP_URL:
 			"https://api.cloudinary.com/v1_1/cloudname/raw/upload",
-		STRIPE_SECRET_KEY: "sk_test_....",
-		STRIPE_PUBLISHABLE_KEY: "pk_test_.....",
+			STRIPE_SECRET_KEY: "sk_test_51MnMhBHYNlhHE0nrf1x1mjYoozMzYqX3zUodPXugjlJTF1TdwsE4qfLnDDCTVPHvthPwnD4UuvmMTPkKKgwYA02700cB3YsyAP",
+			STRIPE_PUBLISHABLE_KEY: "pk_test_51MnMhBHYNlhHE0nrxZSXfjdqSS9CJI06f5BNfIq2yJunoFWh9UOHlzkqgucCr0tJxDHHrd57EbG0ldAc9YsQhfks00FdN2cKCh",
 	},
 };
 

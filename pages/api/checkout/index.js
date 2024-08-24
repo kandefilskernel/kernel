@@ -4,7 +4,7 @@ import { Enrolment, Instructor_Earning, Course } from "database/models";
 import { calculateCartTotal } from "@/utils/calculateCartTotal";
 // import { checkoutConfirmation } from "email-templates/checkout-confirmation";
 
-const stripeSecret = Stripe(process.env.STRIPE_SECRET_KEY);
+//const stripeSecret = Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
 	switch (req.method) {
@@ -25,7 +25,7 @@ const handlePostRequest = async (req, res) => {
 	const { stripeTotal } = calculateCartTotal(cartItems);
 
 	try {
-		await stripeSecret.charges.create(
+		/**await stripeSecret.charges.create(
 			{
 				amount: stripeTotal,
 				currency: "usd",
@@ -36,7 +36,7 @@ const handlePostRequest = async (req, res) => {
 			{
 				idempotencyKey: uuidv4(),
 			}
-		);
+		);**/
 
 		cartItems.forEach(async (cart) => {
 			Enrolment.create({

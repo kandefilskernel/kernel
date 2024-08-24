@@ -71,7 +71,7 @@ const PlaceOrderBtn = ({ user, cartItems }) => {
 
 	return (
 		<StripeCheckout
-			name="Edmy"
+			name="Etudies"
 			amount={stripeAmount}
 			currency="USD"
 			stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}

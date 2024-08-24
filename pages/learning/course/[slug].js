@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import StickyBox from "react-sticky-box";
-import Player from "@/components/Learning/Player";
+import Player from "@/components/Learning/LessonVideoPlayer";
 import { useRouter } from "next/router";
 import baseUrl from "@/utils/baseUrl";
 import axios from "axios";
@@ -69,7 +69,7 @@ const Index = ({ user }) => {
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
 								{selectedVideo && (
-									<Player videoSrc={selectedVideo} /> //Video Player Window
+									<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
 								)}
 
 								<br />

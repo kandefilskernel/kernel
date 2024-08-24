@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Player = ({ videoSrc }) => {
+const LessonVideoPlayer = ({ videoSrc }) => {
 	const [src, setSrc] = useState(videoSrc);
 
 	useEffect(() => {
@@ -15,4 +15,4 @@ const Player = ({ videoSrc }) => {
 	);
 };
 
-export default Player;
+export default LessonVideoPlayer;

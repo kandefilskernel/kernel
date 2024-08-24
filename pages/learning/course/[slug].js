@@ -69,7 +69,7 @@ const Index = ({ user }) => {
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
 								{selectedVideo && (
-									<Player videoSrc={selectedVideo} />
+									<Player videoSrc={selectedVideo} /> //Video Player Window
 								)}
 
 								<br />

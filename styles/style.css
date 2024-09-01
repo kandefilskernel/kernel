@@ -40,6 +40,11 @@ This files table contents are outlined below>>>>>
 /*
 Default Style
 ============================*/
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
 body {
   font-size: 16px;
   font-family: "Josefin Sans", sans-serif;

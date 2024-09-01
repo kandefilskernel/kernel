@@ -1,7 +1,7 @@
 import React from "react";
 import { secondsToHms } from "@/utils/helper";
 
-const VideoList = ({
+const LessonVideo = ({
 	id,
 	title,
 	short_id,
@@ -23,4 +23,4 @@ const VideoList = ({
 	);
 };
 
-export default VideoList;
+export default LessonVideo;

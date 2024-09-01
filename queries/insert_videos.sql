@@ -1,5 +1,7 @@
 
 -- Test Queries for Video Table
+-- Course id: 742d231f-2d5b-42b6-993e-1edeba676f45
+-- Course title: Pianoforall - Incredible New Way To Learn Piano & Keyboard
 
 INSERT INTO `videos` (`id`, `group_name`, `title`, `thumb`, `video`, `video_length`, `is_preview`, `short_id`, `assets_zip`, `userId`, `courseId`, `created_at`, `updated_at`) VALUES
 ('9bd8d2a6-8c9f-482a-bb11-bdc83fcf6e3b', 'Chapter 1', 'Chapter 1', 'https://res.cloudinary.com/dev-empty/image/upload/v1661322036/ifsvlvrm0leoct92zhwo.jpg', 'https://res.cloudinary.com/dev-empty/video/upload/v1661322032/jkoszozrilpyne8mn65i.mp4', 16.7033, 1, 1, NULL, 'ee2ddc7c-08ec-430b-afd0-4da0184bcc4c', '742d231f-2d5b-42b6-993e-1edeba676f45', '2022-08-24 06:20:37', '2022-08-24 06:20:37'),

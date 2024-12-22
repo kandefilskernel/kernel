@@ -16,38 +16,30 @@ import CourseDiscussion from "@/components/Learning/CourseDiscussion";
 import CourseRating from "@/components/Learning/CourseRating";
 import CourseFeedback from "@/components/Learning/CourseFeedback";
 
-
-  
 const Index = ({ user }) => {
-	const [videos, setVideos] = useState([]);
+
+	//Setting up hooks
+
+	const [videos, setVideos] = useState([]); //Initialize the videos state to an empty array and defines the function to update the state
 	const [course, setCourse] = useState({});
 	const [selectedVideo, setSelectedVideo] = useState("");
 	const [active, setActive] = useState("");
-	const [tab, setTab] = useState("overview");
+	const [tab, setTab] = useState("overview"); //Initialize the tab state to overview
 	const {
 		query: { slug },
-	} = useRouter();
+	} = useRouter(); //Extracts the slug attribute of the the query object inside the router object
 
-	const selectedText = "";
-
+	//Defining an effect
 	const fetchVideos = async () => {
 		const url = `${baseUrl}/api/learnings/videos/${slug}`;
 		const response = await axios.get(url);
-		setVideos(response.data.videos);
+		setVideos(response.data.videos); //Executing Side effect: Updates the videos state
 		setSelectedVideo(response.data.videos[0].video);
 		setActive(response.data.videos[0].id);
 		setCourse(response.data.course);
 	};
 
-	const fetchTextLesson = (slug) => {
-		const folder = "markdowns/";
-		const file = `${folder}${slug}.md`;
-		const content = fs.readFileSync(file, "utf8");
-		const matterResult = matter(content);
-		return matterResult;
-	  };
-	
-
+	//Executing an effect: Feteching videos
 	useEffect(() => {
 		fetchVideos();
 	}, [slug]);
@@ -83,8 +75,7 @@ const Index = ({ user }) => {
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
 								{selectedVideo && (
-									//<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
-									<LessonTextPlayer videoSrc={selectedText} />
+									<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
 								)}
 
 								<br />

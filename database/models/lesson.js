@@ -1,8 +1,8 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
 
-const initCourse_Progress = (sequelize, Types) => {
-	class Course_Progress extends Model {
+const initLesson = (sequelize, Types) => {
+	class Lesson extends Model {
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.
@@ -12,14 +12,22 @@ const initCourse_Progress = (sequelize, Types) => {
 			// define association here
 		}
 	}
-	Course_Progress.init(
+	Lesson.init(
 		{
 			id: {
 				type: Types.UUID,
 				defaultValue: Types.UUIDV4,
 				primaryKey: true,
 			},
-			finished: DataTypes.BOOLEAN,
+			group_name: DataTypes.STRING,
+			title: DataTypes.STRING,
+			type: DataTypes.STRING,
+			thumb: DataTypes.STRING,
+			path: DataTypes.STRING,
+			video_length: DataTypes.FLOAT,
+			is_preview: DataTypes.BOOLEAN,
+			short_id: DataTypes.INTEGER,
+			assets_zip: DataTypes.STRING,
 			userId: {
 				type: DataTypes.UUID,
 				allowNull: false,
@@ -40,26 +48,16 @@ const initCourse_Progress = (sequelize, Types) => {
 					as: "courseId",
 				},
 			},
-			lessonId: {
-				type: DataTypes.UUID,
-				allowNull: false,
-				onDelete: "CASCADE",
-				references: {
-					model: "lessons",
-					key: "id",
-					as: "lessonId",
-				},
-			},
 		},
 		{
 			sequelize,
-			modelName: "Course_Progress",
-			tableName: "course_progresses",
+			modelName: "Lesson",
+			tableName: "lessons",
 			createdAt: "created_at",
 			updatedAt: "updated_at",
 		}
 	);
-	return Course_Progress;
+	return Lesson;
 };
 
-export default initCourse_Progress(connection, DataTypes);
+export default initLesson(connection, DataTypes);

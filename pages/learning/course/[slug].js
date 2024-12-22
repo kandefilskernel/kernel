@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import StickyBox from "react-sticky-box";
-import LessonVideoPlayer from "@/components/Learning/LessonVideoPlayer";
 import LessonTextPlayer from "@/components/Learning/LessonTextPlayer";
 import { useRouter } from "next/router";
 import baseUrl from "@/utils/baseUrl";
 import axios from "axios";
-import VideoList from "@/components/Learning/LessonVideo";
+import LessonList from "@/components/Learning/LessonText";
 import ProgressManager from "@/components/Learning/ProgressManager";
 import CourseOverview from "@/components/Learning/CourseOverview";
 import Link from "next/link";
@@ -19,59 +18,66 @@ import CourseFeedback from "@/components/Learning/CourseFeedback";
 
   
 const Index = ({ user }) => {
-	const [videos, setVideos] = useState([]);
+	const [lessons, setLessons] = useState([]);
 	const [course, setCourse] = useState({});
-	const [selectedVideo, setSelectedVideo] = useState("");
+	const [selectedLesson, setSelectedLesson] = useState("");
+	const [selectedContent, setSelectedContent] = useState({});
 	const [active, setActive] = useState("");
 	const [tab, setTab] = useState("overview");
 	const {
 		query: { slug },
 	} = useRouter();
 
-	const selectedText = "";
-
-	const fetchVideos = async () => {
-		const url = `${baseUrl}/api/learnings/videos/${slug}`;
+	const fetchLessons = async () => {
+		const url = `${baseUrl}/api/learnings/lessons/${slug}`;
 		const response = await axios.get(url);
-		setVideos(response.data.videos);
-		setSelectedVideo(response.data.videos[0].video);
-		setActive(response.data.videos[0].id);
-		setCourse(response.data.course);
-	};
-
-	const fetchTextLesson = (slug) => {
-		const folder = "markdowns/";
-		const file = `${folder}${slug}.md`;
-		const content = fs.readFileSync(file, "utf8");
-		const matterResult = matter(content);
-		return matterResult;
-	  };
+		setLessons(response.data.lessons);
+		
+		console.log("====LIST OF LESSONS===");
+		console.log("Lesson List:",response.data.lessons);
+	
+		setSelectedLesson(response.data.lessons[0]);
 	
 
+		setActive(response.data.lessons[0].id);
+		setCourse(response.data.course);
+
+	};
+
+	
 	useEffect(() => {
-		fetchVideos();
+		fetchLessons();
 	}, [slug]);
 
-	const selectVideo = async (videoId) => {
-		// console.log(videoId);
+	console.log("====FIRST SELECTED LESSON===");
+	console.log("Initial Selected lesson:",selectedLesson);
+
+	const selectLesson = async (lessonId) => {
 		try {
 			const payload = {
-				params: { userId: user.id, courseId: course.id },
+				params: { userId: user.id, courseId: course.id, courseSlug:slug },
 			};
-			const url = `${baseUrl}/api/learnings/video/${videoId}`;
+			const url = `${baseUrl}/api/learnings/lesson/${lessonId}`; //Getting the lessson, and retriving the markup text
 			const response = await axios.get(url, payload);
+
+			console.log("====LESSON AND CONTENT===");
+			console.log("Response:",response);
+
 			const {
-				data: { video },
+				data: { lesson, content},
 			} = response;
 
-			setSelectedVideo(video.video);
-			setActive(video.id);
+			setSelectedLesson(lesson);
+			setActive(lesson.id);
+			setSelectedContent(content);
 
-			// console.log(video);
 		} catch (err) {
-			console.log(err.response.data);
+			console.log(err.response);
 		}
 	};
+
+	console.log("====SLECTED CONTENT ===");
+	console.log(" Selected Content:",selectedContent);
 
 	return (
 		<>
@@ -82,9 +88,8 @@ const Index = ({ user }) => {
 					<div className="row">
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
-								{selectedVideo && (
-									//<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
-									<LessonTextPlayer videoSrc={selectedText} />
+								{selectedContent && (
+									<LessonTextPlayer textSrc={selectedContent} />
 								)}
 
 								<br />
@@ -194,10 +199,10 @@ const Index = ({ user }) => {
 							<StickyBox offsetTop={20} offsetBottom={20}>
 								<div className="video-sidebar">
 									<ProgressManager
-										videos_count={videos.length}
+										lessons_count={lessons.length}
 										userId={user.id}
 										courseId={course.id}
-										selectedVideo={selectedVideo}
+										selectedLesson={selectedLesson}
 									/>
 
 									<div className="course-video-list">
@@ -205,14 +210,14 @@ const Index = ({ user }) => {
 											{course && course.title}
 										</h4>
 										<ul>
-											{videos.length > 0 &&
-												videos.map((video) => (
-													<VideoList
-														key={video.id}
-														{...video}
+											{lessons.length > 0 &&
+												lessons.map((lesson) => (
+													<LessonList
+														key={lesson.id}
+														{...lesson}
 														onPlay={() =>
-															selectVideo(
-																video.id
+															selectLesson(
+																lesson.id
 															)
 														}
 														activeClass={active}

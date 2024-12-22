@@ -18,8 +18,7 @@ Course.belongsTo(Category, { foreignKey: "catId", as: "category" });
 Course.hasMany(Lesson, { foreignKey: "courseId", as: "lessons" });
 Lesson.belongsTo(Course, { foreignKey: "courseId", as: "course" });
 
-
-User.hasMany(Lesson, { foreignKey: "userId", as: "lessons" });
+User.hasMany(Video, { foreignKey: "userId", as: "videos" });
 Video.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 User.hasMany(Favourite, { foreignKey: "userId", as: "favourites" });
@@ -62,16 +61,16 @@ Course.hasMany(Course_Progress, {
 Course_Progress.belongsTo(Course, { foreignKey: "courseId", as: "course" });
 
 Video.hasMany(Course_Progress, {
-	foreignKey: "lessonId",
+	foreignKey: "videoId",
 	as: "course_progresses",
 });
-Course_Progress.belongsTo(Lesson, { foreignKey: "lessonId", as: "lesson" });
+Course_Progress.belongsTo(Video, { foreignKey: "videoId", as: "video" });
 
 export {
 	User,
 	Course,
 	Category,
-	Lesson,
+	Video,
 	Favourite,
 	Enrolment,
 	Instructor_Earning,

@@ -4,7 +4,7 @@ import baseUrl from "@/utils/baseUrl";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const ProgressManager = ({ userId, courseId, videos_count, selectedVideo }) => {
+const ProgressManager = ({ userId, courseId, lessons_count, selectedVideo }) => {
 	const [pro, setPro] = useState(0);
 	const {
 		query: { slug },
@@ -30,10 +30,10 @@ const ProgressManager = ({ userId, courseId, videos_count, selectedVideo }) => {
 			<p className="mb-2">
 				Your progress{" "}
 				<strong>
-					{pro} of {videos_count} complete
+					{pro} of {lessons_count} complete
 				</strong>
 				.{" "}
-				{progress(pro, videos_count) == 100 ? (
+				{progress(pro, lessons_count) == 100 ? (
 					<span
 						onClick={() =>
 							router.push(`/learning/certificate/${slug}`)
@@ -66,13 +66,13 @@ const ProgressManager = ({ userId, courseId, videos_count, selectedVideo }) => {
 					role="progressbar"
 					aria-label="Example with label"
 					style={{
-						width: `${progress(pro, videos_count)}%`,
+						width: `${progress(pro, lessons_count)}%`,
 					}}
-					aria-valuenow={`${progress(pro, videos_count)}`}
+					aria-valuenow={`${progress(pro, lessons_count)}`}
 					aria-valuemin="0"
 					aria-valuemax="100"
 				>
-					{progress(pro, videos_count)}%
+					{progress(pro, lessons_count)}%
 				</div>
 			</div>
 		</div>

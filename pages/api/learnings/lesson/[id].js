@@ -6,9 +6,12 @@ export default async function handler(req, res) {
 	const { id, userId, courseId, courseSlug } = req.query;
 	// console.log("###", req.query);
 
-const fetchTextLesson = (slug, name, shortId) => {
-		const folder = "markdowns/";
-		const file = `${folder}${slug+"/"}${shortId+". "}${name}.md`;
+const fetchLessonContent = (slug, name, shortId) => {
+		const path = "C:/fileserver/markdowns/";
+
+		const file = `${path}${slug+"/"}${shortId+". "}${name}.md`;
+		//const lessonSlug = "1_from_assessment_to_action_Agile_leadership";
+		//const file = `${path}${slug+"/"}${lessonSlug}.md`;
 		const content = fs.readFileSync(file, "utf8");
 		const matterResult = matter(content);
 		return matterResult;
@@ -17,7 +20,7 @@ const fetchTextLesson = (slug, name, shortId) => {
 	try {
 
 		const lesson = await Lesson.findOne({ where: { id: id } });
-		const content =  fetchTextLesson(courseSlug, lesson.title, lesson.short_id);
+		const content =  fetchLessonContent(courseSlug, lesson.title, lesson.short_id);
 
 		console.log("====CONTENT===");
 		console.log("Content:",content);

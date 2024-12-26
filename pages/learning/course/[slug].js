@@ -31,26 +31,17 @@ const Index = ({ user }) => {
 	const fetchLessons = async () => {
 		const url = `${baseUrl}/api/learnings/lessons/${slug}`;
 		const response = await axios.get(url);
+
 		setLessons(response.data.lessons);
-		
-		console.log("====LIST OF LESSONS===");
-		console.log("Lesson List:",response.data.lessons);
-	
 		setSelectedLesson(response.data.lessons[0]);
-	
-
 		setActive(response.data.lessons[0].id);
+		setSelectedContent(response.data.initalContent);
 		setCourse(response.data.course);
-
 	};
 
-	
 	useEffect(() => {
 		fetchLessons();
 	}, [slug]);
-
-	console.log("====FIRST SELECTED LESSON===");
-	console.log("Initial Selected lesson:",selectedLesson);
 
 	const selectLesson = async (lessonId) => {
 		try {
@@ -59,9 +50,6 @@ const Index = ({ user }) => {
 			};
 			const url = `${baseUrl}/api/learnings/lesson/${lessonId}`; //Getting the lessson, and retriving the markup text
 			const response = await axios.get(url, payload);
-
-			console.log("====LESSON AND CONTENT===");
-			console.log("Response:",response);
 
 			const {
 				data: { lesson, content},
@@ -75,9 +63,6 @@ const Index = ({ user }) => {
 			console.log(err.response);
 		}
 	};
-
-	console.log("====SLECTED CONTENT ===");
-	console.log(" Selected Content:",selectedContent);
 
 	return (
 		<>

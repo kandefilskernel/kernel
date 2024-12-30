@@ -74,7 +74,7 @@ const Index = ({ user }) => {
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
 								{selectedContent && (
-									<LessonTextPlayer textSrc={selectedContent} />
+									<LessonTextPlayer textSrc={selectedContent} lesson={selectedLesson} student={user} />
 								)}
 
 								<br />
@@ -206,6 +206,7 @@ const Index = ({ user }) => {
 															)
 														}
 														activeClass={active}
+														isComplete={null}
 													/>
 												))}
 										</ul>

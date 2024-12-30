@@ -44,11 +44,20 @@ const CourseCard = ({ course: { user, image, title, slug, is_class } }) => {
 				</div>
 				<div className="courses-content">
 					<h3>
-						<a>{title}</a>
+						{is_class ? (
+							<Link href={`/learning/course/class/${slug}`}>
+								<a>{title}</a>
+							</Link>
+						) : (
+							<Link href={`/learning/course/${slug}`}>
+								<a>{title}</a>
+							</Link>
+						)}
 					</h3>
 
-					<div className="course-author d-flex justify-content-end">
-						<a href={`/learning/course/${slug}`} class="btn btn-outline-primary btn-sm active" role="button" aria-pressed="true">Start Course</a>
+					<div className="course-author d-flex justify-content-between">
+						<span>{`${user.first_name} ${user.last_name}`}</span>
+						<p>Start Course</p>
 					</div>
 				</div>
 			</div>

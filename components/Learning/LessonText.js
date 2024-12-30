@@ -15,7 +15,7 @@ const LessonText = ({
 		>
 			{short_id}. {title}
 			<span className="d-block text-muted fs-13 mt-1">
-				<i className="bx bx-play-circle"></i>{" "}
+				<i className="bx bx-play-circle"></i><i className="bx bx-task"></i>{" "}
 				{}
 			</span>
 		</li>

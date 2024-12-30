@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 			});
 			if (!progress) {
 				await Course_Progress.create({
-					finished: true,
+					finished: false,
 					userId,
 					courseId,
 					lessonId: id,

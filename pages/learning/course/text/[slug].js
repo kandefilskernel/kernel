@@ -16,6 +16,8 @@ import CourseDiscussion from "@/components/Learning/CourseDiscussion";
 import CourseRating from "@/components/Learning/CourseRating";
 import CourseFeedback from "@/components/Learning/CourseFeedback";
 
+
+  
 const Index = ({ user }) => {
 	const [videos, setVideos] = useState([]);
 	const [course, setCourse] = useState({});
@@ -26,6 +28,8 @@ const Index = ({ user }) => {
 		query: { slug },
 	} = useRouter();
 
+	const selectedText = "";
+
 	const fetchVideos = async () => {
 		const url = `${baseUrl}/api/learnings/videos/${slug}`;
 		const response = await axios.get(url);
@@ -34,6 +38,15 @@ const Index = ({ user }) => {
 		setActive(response.data.videos[0].id);
 		setCourse(response.data.course);
 	};
+
+	const fetchTextLesson = (slug) => {
+		const folder = "markdowns/";
+		const file = `${folder}${slug}.md`;
+		const content = fs.readFileSync(file, "utf8");
+		const matterResult = matter(content);
+		return matterResult;
+	  };
+	
 
 	useEffect(() => {
 		fetchVideos();
@@ -70,7 +83,8 @@ const Index = ({ user }) => {
 						<div className="col-lg-9 col-md-8">
 							<div className="video-content">
 								{selectedVideo && (
-									<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
+									//<LessonVideoPlayer videoSrc={selectedVideo} /> //Video lesson player Window
+									<LessonTextPlayer videoSrc={selectedText} />
 								)}
 
 								<br />

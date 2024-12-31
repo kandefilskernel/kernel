@@ -1,8 +1,8 @@
 import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
 
-const initCourse_Progress = (sequelize, Types) => {
-	class Course_Progress extends Model {
+const initMessage = (sequelize, Types) => {
+	class Message extends Model {
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.
@@ -12,14 +12,14 @@ const initCourse_Progress = (sequelize, Types) => {
 			// define association here
 		}
 	}
-	Course_Progress.init(
+	Message.init(
 		{
 			id: {
 				type: Types.UUID,
 				defaultValue: Types.UUIDV4,
 				primaryKey: true,
 			},
-			finished: DataTypes.BOOLEAN,
+			message: DataTypes.STRING,
 			userId: {
 				type: DataTypes.UUID,
 				allowNull: false,
@@ -40,26 +40,15 @@ const initCourse_Progress = (sequelize, Types) => {
 					as: "courseId",
 				},
 			},
-			videoId: {
-				type: DataTypes.UUID,
-				allowNull: false,
-				onDelete: "CASCADE",
-				references: {
-					model: "videos",
-					key: "id",
-					as: "videoId",
-				},
-			},
 		},
 		{
 			sequelize,
-			modelName: "Course_Progress",
-			tableName: "course_progresses",
+			modelName: "Message",
+			tableName: "messages",
 			createdAt: "created_at",
 			updatedAt: "updated_at",
 		}
 	);
-	return Course_Progress;
+	return Message;
 };
-
-export default initCourse_Progress(connection, DataTypes);
+export default initMessage(connection, DataTypes);

@@ -25,7 +25,7 @@ const initCourse = (sequelize, Types) => {
 			overview: DataTypes.TEXT,
 			latest_price: DataTypes.FLOAT,
 			before_price: DataTypes.FLOAT,
-			lessons_count: DataTypes.STRING,
+			lessons: DataTypes.STRING,
 			duration: DataTypes.STRING,
 			image: DataTypes.STRING,
 			access_time: {

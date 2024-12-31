@@ -2,7 +2,6 @@ import User from "./user";
 import Category from "./category";
 import Course from "./course";
 import Video from "./video";
-import Lesson from "./lesson";
 import Favourite from "./favourite";
 import Enrolment from "./enrolment";
 import Instructor_Earning from "./instructor_earning";
@@ -15,11 +14,10 @@ Course.belongsTo(User, { foreignKey: "userId", as: "user" });
 Category.hasMany(Course, { foreignKey: "catId", as: "courses" });
 Course.belongsTo(Category, { foreignKey: "catId", as: "category" });
 
-Course.hasMany(Lesson, { foreignKey: "courseId", as: "lessons" });
-Lesson.belongsTo(Course, { foreignKey: "courseId", as: "course" });
+Course.hasMany(Video, { foreignKey: "courseId", as: "videos" });
+Video.belongsTo(Course, { foreignKey: "courseId", as: "course" });
 
-
-User.hasMany(Lesson, { foreignKey: "userId", as: "lessons" });
+User.hasMany(Video, { foreignKey: "userId", as: "videos" });
 Video.belongsTo(User, { foreignKey: "userId", as: "user" });
 
 User.hasMany(Favourite, { foreignKey: "userId", as: "favourites" });
@@ -62,16 +60,16 @@ Course.hasMany(Course_Progress, {
 Course_Progress.belongsTo(Course, { foreignKey: "courseId", as: "course" });
 
 Video.hasMany(Course_Progress, {
-	foreignKey: "lessonId",
+	foreignKey: "videoId",
 	as: "course_progresses",
 });
-Course_Progress.belongsTo(Lesson, { foreignKey: "lessonId", as: "lesson" });
+Course_Progress.belongsTo(Video, { foreignKey: "videoId", as: "video" });
 
 export {
 	User,
 	Course,
 	Category,
-	Lesson,
+	Video,
 	Favourite,
 	Enrolment,
 	Instructor_Earning,
